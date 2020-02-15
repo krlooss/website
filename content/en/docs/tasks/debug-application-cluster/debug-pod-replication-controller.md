@@ -63,7 +63,7 @@ case you can try several things:
     information:
 
     ```shell
-    kubectl get nodes -o yaml | egrep '\sname:\|cpu:\|memory:'
+    kubectl get nodes -o yaml | egrep '\sname:|cpu:|memory:'
     kubectl get nodes -o json | jq '.items[] | {name: .metadata.name, cap: .status.capacity}'
     ```
 
@@ -122,6 +122,8 @@ As an example, to look at the logs from a running Cassandra pod, you might run:
 ```shell
 kubectl exec cassandra -- cat /var/log/cassandra/system.log
 ```
+
+If your cluster enabled it, you can also try adding an [ephemeral container](/docs/concepts/workloads/pods/ephemeral-containers/) into the existing pod. You can use the new temporary container to run arbitrary commands, for example, to diagnose problems inside the Pod. See the page about [ephemeral container](/docs/concepts/workloads/pods/ephemeral-containers/) for more details, including feature availability.
 
 If none of these approaches work, you can find the host machine that the pod is
 running on and SSH into that host.

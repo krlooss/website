@@ -83,7 +83,14 @@ kubectl diff -f https://k8s.io/examples/application/simple_deployment.yaml
 ```
 
 {{< note >}}
-`diff` uses [server-side dry-run](/docs/reference/using-api/api-concepts/#dry-run), which needs to be enabled on `kube-apiserver`.
+`diff` uses [server-side dry-run](/docs/reference/using-api/api-concepts/#dry-run),
+which needs to be enabled on `kube-apiserver`.
+
+Since `diff` performs a server-side apply request in dry-run mode,
+it requires granting `PATCH`, `CREATE`, and `UPDATE` permissions.
+See [Dry-Run Authorization](/docs/reference/using-api/api-concepts#dry-run-authorization)
+for details.
+
 {{< /note >}}
 
 Create the object using `kubectl apply`:
@@ -764,7 +771,7 @@ spec:
     rollingUpdate: # defaulted by apiserver - derived from strategy.type
       maxSurge: 1
       maxUnavailable: 1
-    type: RollingUpdate # defaulted apiserver
+    type: RollingUpdate # defaulted by apiserver
   template:
     metadata:
       creationTimestamp: null
@@ -939,7 +946,7 @@ configuration involves several manual steps:
 1. Export the live object to a local configuration file:
 
      ```shell
-     kubectl get <kind>/<name> -o yaml --export > <kind>_<name>.yaml
+     kubectl get <kind>/<name> -o yaml > <kind>_<name>.yaml
      ```
 
 1. Manually remove the `status` field from the configuration file.
@@ -985,11 +992,11 @@ used only by the controller selector with no other semantic meaning.
 ```yaml
 selector:
   matchLabels:
-      controller-selector: "extensions/v1beta1/deployment/nginx"
+      controller-selector: "apps/v1/deployment/nginx"
 template:
   metadata:
     labels:
-      controller-selector: "extensions/v1beta1/deployment/nginx"
+      controller-selector: "apps/v1/deployment/nginx"
 ```
 
 {{% capture whatsnext %}}

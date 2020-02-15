@@ -10,13 +10,13 @@ weight: 65
 
 {{< feature-state for_k8s_version="v1.12" state="alpha" >}}
 
-The TTL controller provides a TTL mechanism to limit the lifetime of resource
+The TTL controller provides a TTL (time to live) mechanism to limit the lifetime of resource
 objects that have finished execution. TTL controller only handles
 [Jobs](/docs/concepts/workloads/controllers/jobs-run-to-completion/) for
 now, and may be expanded to handle other resources that will finish execution,
 such as Pods and custom resources.
 
-Alpha Disclaimer: this feature is currently alpha, and can be enabled with
+Alpha Disclaimer: this feature is currently alpha, and can be enabled with both kube-apiserver and kube-controller-manager
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/)
 `TTLAfterFinished`.
 
@@ -84,6 +84,6 @@ very small. Please be aware of this risk when setting a non-zero TTL.
 
 [Clean up Jobs automatically](/docs/concepts/workloads/controllers/jobs-run-to-completion/#clean-up-finished-jobs-automatically)
 
-[Design doc](https://github.com/kubernetes/community/blob/master/keps/sig-apps/0026-ttl-after-finish.md)
+[Design doc](https://github.com/kubernetes/enhancements/blob/master/keps/sig-apps/0026-ttl-after-finish.md)
 
 {{% /capture %}}

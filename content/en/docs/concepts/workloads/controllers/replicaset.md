@@ -32,7 +32,7 @@ ReplicaSet's identifying information within their ownerReferences field. It's th
 knows of the state of the Pods it is maintaining and plans accordingly.
 
 A ReplicaSet identifies new Pods to acquire by using its selector. If there is a Pod that has no OwnerReference or the
-OwnerReference is not a controller and it matches a ReplicaSet's selector, it will be immediately acquired by said
+OwnerReference is not a {{< glossary_tooltip term_id="controller" >}} and it matches a ReplicaSet's selector, it will be immediately acquired by said
 ReplicaSet.
 
 ## When to use a ReplicaSet
@@ -77,7 +77,7 @@ And you will see output similar to:
 ```shell
 Name:		frontend
 Namespace:	default
-Selector:	tier=frontend,tier in (frontend)
+Selector:	tier=frontend
 Labels:		app=guestbook
 		tier=frontend
 Annotations:	<none>
@@ -136,7 +136,7 @@ metadata:
   name: frontend-9si5l
   namespace: default
   ownerReferences:
-  - apiVersion: extensions/v1beta1
+  - apiVersion: apps/v1
     blockOwnerDeletion: true
     controller: true
     kind: ReplicaSet
@@ -261,7 +261,7 @@ the -d option.
 For example:
 ```shell
 kubectl proxy --port=8080
-curl -X DELETE  'localhost:8080/apis/extensions/v1beta1/namespaces/default/replicasets/frontend' \
+curl -X DELETE  'localhost:8080/apis/apps/v1/namespaces/default/replicasets/frontend' \
 > -d '{"kind":"DeleteOptions","apiVersion":"v1","propagationPolicy":"Foreground"}' \
 > -H "Content-Type: application/json"
 ```
@@ -273,7 +273,7 @@ When using the REST API or the `client-go` library, you must set `propagationPol
 For example:
 ```shell
 kubectl proxy --port=8080
-curl -X DELETE  'localhost:8080/apis/extensions/v1beta1/namespaces/default/replicasets/frontend' \
+curl -X DELETE  'localhost:8080/apis/apps/v1/namespaces/default/replicasets/frontend' \
 > -d '{"kind":"DeleteOptions","apiVersion":"v1","propagationPolicy":"Orphan"}' \
 > -H "Content-Type: application/json"
 ```
@@ -281,7 +281,8 @@ curl -X DELETE  'localhost:8080/apis/extensions/v1beta1/namespaces/default/repli
 Once the original is deleted, you can create a new ReplicaSet to replace it.  As long
 as the old and new `.spec.selector` are the same, then the new one will adopt the old Pods.
 However, it will not make any effort to make existing Pods match a new, different pod template.
-To update Pods to a new spec in a controlled way, use a [rolling update](#rolling-updates).
+To update Pods to a new spec in a controlled way, use a 
+[Deployment](/docs/concepts/workloads/controllers/deployment/#creating-a-deployment), as ReplicaSets do not support a rolling update directly.
 
 ### Isolating Pods from a ReplicaSet
 

@@ -88,17 +88,17 @@ Once you have the control plane set up, you can start creating federation API
 resources.
 The following guides explain some of the resources in detail:
 
-* [Cluster](/docs/tasks/administer-federation/cluster/)
-* [ConfigMap](/docs/tasks/administer-federation/configmap/)
-* [DaemonSets](/docs/tasks/administer-federation/daemonset/)
-* [Deployment](/docs/tasks/administer-federation/deployment/)
-* [Events](/docs/tasks/administer-federation/events/)
-* [Hpa](/docs/tasks/administer-federation/hpa/)
-* [Ingress](/docs/tasks/administer-federation/ingress/)
-* [Jobs](/docs/tasks/administer-federation/job/)
-* [Namespaces](/docs/tasks/administer-federation/namespaces/)
-* [ReplicaSets](/docs/tasks/administer-federation/replicaset/)
-* [Secrets](/docs/tasks/administer-federation/secret/)
+* [Cluster](/docs/tasks/federation/administer-federation/cluster/)
+* [ConfigMap](/docs/tasks/federation/administer-federation/configmap/)
+* [DaemonSets](/docs/tasks/federation/administer-federation/daemonset/)
+* [Deployment](/docs/tasks/federation/administer-federation/deployment/)
+* [Events](/docs/tasks/federation/administer-federation/events/)
+* [Hpa](/docs/tasks/federation/administer-federation/hpa/)
+* [Ingress](/docs/tasks/federation/administer-federation/ingress/)
+* [Jobs](/docs/tasks/federation/administer-federation/job/)
+* [Namespaces](/docs/tasks/federation/administer-federation/namespaces/)
+* [ReplicaSets](/docs/tasks/federation/administer-federation/replicaset/)
+* [Secrets](/docs/tasks/federation/administer-federation/secret/)
 * [Services](/docs/concepts/cluster-administration/federation-service-discovery/)
 
 
@@ -170,7 +170,7 @@ users in the event of a cluster failure), then you need to have `R * (U + 1)` cl
 
 Finally, if any of your clusters would need more than the maximum recommended number of nodes for a Kubernetes cluster, then
 you may need even more clusters.  Kubernetes v1.3 supports clusters up to 1000 nodes in size. Kubernetes v1.8 supports
-clusters up to 5000 nodes. See [Building Large Clusters](/docs/setup/cluster-large/) for more guidance.
+clusters up to 5000 nodes. See [Building Large Clusters](/docs/setup/best-practices/cluster-large/) for more guidance.
 
 {{% /capture %}}
 
